@@ -64,6 +64,17 @@ const mid = getElementById('middleText');
 
 function start() {
     if (questions.length != 0) {
+        header.style.display= "none";
+        startBtn.style.display= "none";
+        firstBtn.style.display= "block";
+        secondBtn.style.display= "block";
+        thirdBtn.style.display= "block";
+        fourthBtn.style.display= "block";
+        nextBtn.style.display= "block";
         mid.innerHTML = questions.question;
     }
 };
+
+function check(){
+    
+}
