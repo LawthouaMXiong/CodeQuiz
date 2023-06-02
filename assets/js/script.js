@@ -68,12 +68,43 @@ const name = document.getElementById('inputName');
 const highScores = document.getElementById('highScores');
 
 let score = 0;
-let questionCounter = 0;
+let questionCounter = -1;
+let timerCount= 5;
+
 
 function start() {
-    
+    viewHighScores.classList.add('d-none');
+    timer.classList.remove('d-none');
+    landingPage.classList.add('d-none');
+    quizPage.classList.remove('d-none');
+    score = 0;
+    timerStart();
 };
+
+function timerStart(){
+    const tiktok = setInterval(function(){
+        timerCount--;
+        time.textContent = timerCount;
+        if (timerCount === 0 ){
+            timer.classList.add('d-none');
+            timeEnd.classList.remove('d-none');
+            clearInterval(tiktok);
+            endGame();
+        };
+    }, 1000);
+};
+
+function endGame(){
+    finalPage.classList.remove('d-none');
+    quizPage.classList.add('d-none');
+}
+
+function generateQuestions(){
+
+}
 
 function check(){
     
 };
+
+startBtn.addEventListener("click", start)
