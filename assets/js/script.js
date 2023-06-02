@@ -1,4 +1,4 @@
-const questions = [
+let questions = [
     {
         question: "What is a boolean?",
         options:
@@ -45,36 +45,35 @@ const questions = [
     },
 ];
 
-const questionNumber = 1;
-const score = 0;
+const timer = document.getElementById('timer');
+const time = document.getElementById('time');
+const timeEnd = document.getElementById('timeEnd');
 
-const timer = getElementById('timer');
-const time = getElementById('time');
-const timeEnd = getElementById('timeEnd');
+const startBtn = document.getElementById('btn0');
+const firstBtn = document.getElementById('btn1');
+const secondBtn = document.getElementById('btn2');
+const thirdBtn = document.getElementById('btn3');
+const fourthBtn = document.getElementById('btn4');
+const nextBtn = document.getElementById('btnNext');
+const submitBtn = document.getElementById('btnSub')
 
-const startBtn = getElementById('btn0');
-const firstBtn = getElementById('btn1');
-const secondBtn = getElementById('btn2');
-const thirdBtn = getElementById('btn3');
-const fourthBtn = getElementById('btn4');
-const nextBtn = getElementById('btnNext');
+const landingPage = document.querySelector('.landing');
+const quizPage = document.querySelector('.quiz');
+const finalPage = document.querySelector('.final');
+const highScorePage = document.querySelector('.highScoreSection');
 
-const header = getElementById('header');
-const mid = getElementById('middleText');
+const viewHighScores = document.getElementById('showHighScores');
+const questionPrompt = document.getElementById('questionPrompt');
+const name = document.getElementById('inputName');
+const highScores = document.getElementById('highScores');
+
+let score = 0;
+let questionCounter = 0;
 
 function start() {
-    if (questions.length != 0) {
-        header.style.display= "none";
-        startBtn.style.display= "none";
-        firstBtn.style.display= "block";
-        secondBtn.style.display= "block";
-        thirdBtn.style.display= "block";
-        fourthBtn.style.display= "block";
-        nextBtn.style.display= "block";
-        mid.innerHTML = questions.question;
-    }
+    
 };
 
 function check(){
     
-}
+};
