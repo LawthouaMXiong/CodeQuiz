@@ -1,38 +1,5 @@
 let questions = [
     {
-        question: "What is a boolean?",
-        options:
-            [
-                "String",
-                "Variable",
-                "True or False",
-                "Integer"
-            ],
-        correct: "True or False"
-    },
-    {
-        question: "What is a variable?",
-        options:
-            [
-                "Type of car",
-                "y=mx+b",
-                "Currency",
-                "Something that we can store data"
-            ],
-        correct: "Something that we can store data"
-    },
-    {
-        question: "What is a the difference between '==' and '==='?",
-        options:
-            [
-                "Nothing",
-                "Double is comparing values, and triple is comparing values and types",
-                "Comparison operators",
-                "Equal to"
-            ],
-        correct: "Double is comparing values, and triple is comparing values and types"
-    },
-    {
         question: "What is the point of JavaScript?",
         options:
             [
@@ -64,12 +31,14 @@ const highScorePage = document.querySelector('.highScoreSection');
 
 const viewHighScores = document.getElementById('showHighScores');
 const questionPrompt = document.getElementById('questionPrompt');
-const name = document.getElementById('inputName');
-const highScores = document.getElementById('highScores');
+const nameInput = document.getElementById('inputName');
+const highScoreList = document.getElementById('highScoreList');
+const feedback = document.getElementById('feedback');
+const finalScore = document.getElementById('score');
 
 let score = 0;
-let questionCounter = -1;
-let timerCount= 5;
+let questionCounter = 0;
+let timerCount = 5;
 
 
 function start() {
@@ -78,14 +47,15 @@ function start() {
     landingPage.classList.add('d-none');
     quizPage.classList.remove('d-none');
     score = 0;
+    generateQuestions();
     timerStart();
 };
 
-function timerStart(){
-    const tiktok = setInterval(function(){
+function timerStart() {
+    const tiktok = setInterval(function () {
         timerCount--;
         time.textContent = timerCount;
-        if (timerCount === 0 ){
+        if (timerCount === 0) {
             timer.classList.add('d-none');
             timeEnd.classList.remove('d-none');
             clearInterval(tiktok);
@@ -94,17 +64,129 @@ function timerStart(){
     }, 1000);
 };
 
-function endGame(){
+function endGame() {
     finalPage.classList.remove('d-none');
     quizPage.classList.add('d-none');
+    viewHighScores.classList.remove('d-none');
+    finalScore.textContent = score;
 }
 
-function generateQuestions(){
-
+function generateQuestions() {
+    questionPrompt.textContent = questions[questionCounter].question;
+    firstBtn.textContent = questions[questionCounter].options[0];
+    secondBtn.textContent = questions[questionCounter].options[1];
+    thirdBtn.textContent = questions[questionCounter].options[2];
+    fourthBtn.textContent = questions[questionCounter].options[3];
 }
 
-function check(){
-    
+function check(answer) {
+    feedback.classList.remove('d-none');
+
+    if (questions[questionCounter].options[answer] === questions[questionCounter].correct) {
+        feedback.textContent = 'YES';
+        score++;
+    } else {
+        feedback.textContent = 'NO';
+    }
 };
 
+function chooseOne() {
+    check(0)
+    timer.classList.add('d-none');
+
+    let pauseTime = 1;
+    const pause = setInterval(function () {
+        pauseTime--;
+        if (pauseTime === 0) {
+            clearInterval(pause);
+            timeEnd.classList.add('d-none');
+            endGame();
+        };
+    }, 1000);
+};
+function chooseTwo() {
+    check(1)
+    timer.classList.add('d-none');
+    timeEnd.classList.add('d-none');
+    let pauseTime = 1;
+    const pause = setInterval(function () {
+        pauseTime--;
+        if (pauseTime === 0) {
+            clearInterval(pause);
+            endGame();
+        };
+    }, 1000);
+};
+function chooseThree() {
+    check(2)
+    timer.classList.add('d-none');
+    timeEnd.classList.add('d-none');
+    let pauseTime = 1;
+    const pause = setInterval(function () {
+        pauseTime--;
+        if (pauseTime === 0) {
+            clearInterval(pause);
+            endGame();
+        };
+    }, 1000);
+};
+function chooseFour() {
+    check(3)
+    timer.classList.add('d-none');
+    timeEnd.classList.add('d-none');
+    let pauseTime = 1;
+    const pause = setInterval(function () {
+        pauseTime--;
+        if (pauseTime === 0) {
+            clearInterval(pause);
+            endGame();
+        };
+    }, 1000);
+};
+
+function showScores() {
+    landingPage.classList.add('d-none');
+    finalPage.classList.add('d-none');
+    highScorePage.classList.remove('d-none');
+    const savedScores = localStorage.getItem('score');
+    const storedScores = JSON.parse(savedScores);
+
+    for (let i = 0; i < storedScores.length; i++) {
+        let newScore = document.createElement('li');
+        newScore.innerHTML = storedScores[i].name + " scored " + storedScores[i].score;
+        highScoreList.appendChild(newScore);
+    }
+}
+
+function saveScores(event) {
+    event.preventDefault();
+
+    const savedScores = localStorage.getItem('score');
+    let scoresArray;
+
+    if (savedScores === null) {
+        scoresArray = [];
+    } else {
+        scoresArray = JSON.parse(saveScores);
+    };
+
+    let userScore = {
+        name: nameInput.value,
+        score: finalScore.textContent
+    }
+
+    scoresArray.push(userScore);
+
+    const stringifyArray = JSON.stringify(scoresArray);
+    window.localStorage.setItem('scoresList', stringifyArray);
+
+    showScores();
+}
+
 startBtn.addEventListener("click", start)
+firstBtn.addEventListener('click', chooseOne);
+secondBtn.addEventListener('click', chooseTwo);
+thirdBtn.addEventListener('click', chooseThree);
+fourthBtn.addEventListener('click', chooseFour);
+viewHighScores.addEventListener('click', showScores);
+submitBtn.addEventListener('click', saveScores)
