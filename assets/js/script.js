@@ -148,14 +148,6 @@ function showScores() {
     landingPage.classList.add('d-none');
     finalPage.classList.add('d-none');
     highScorePage.classList.remove('d-none');
-    const savedScores = localStorage.getItem('score');
-    const storedScores = JSON.parse(savedScores);
-
-    for (let i = 0; i < storedScores.length; i++) {
-        let newScore = document.createElement('li');
-        newScore.innerHTML = storedScores[i].name + " scored " + storedScores[i].score;
-        highScoreList.appendChild(newScore);
-    }
 }
 
 function saveScores(event) {
