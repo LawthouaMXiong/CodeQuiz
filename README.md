@@ -22,5 +22,5 @@ WHEN the game is over<br />
 THEN I can save my initials and my score<br />
 
 ## **Links to Portfolio**
-* GitHub Repository Link - https://github.com/LawthouaMXiong/Challenge4
-* GitHub Pages Deployed Link - https://lawthouamxiong.github.io/Challenge4/
+* GitHub Repository Link - https://github.com/LawthouaMXiong/CodeQuiz
+* GitHub Pages Deployed Link - https://lawthouamxiong.github.io/CodeQuiz/
